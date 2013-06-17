@@ -12,4 +12,4 @@ http://www.watterott.com/en/Arduino-CANdiy-Shield
 
 
 ## Projects
-[Projects using the CANdiy-Shield](https://github.com/watterott/CANdiy-Shield/blob/master/Projects.md)
+* [Projects using the CANdiy-Shield](https://github.com/watterott/CANdiy-Shield/blob/master/Projects.md)
