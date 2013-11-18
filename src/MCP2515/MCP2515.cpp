@@ -116,9 +116,9 @@
 boolean MCP2515::initCAN(int baudConst)
 {
   byte mode;
-  
+
   SPI.begin();
-  
+
   pinMode(SLAVESELECT, OUTPUT);
   digitalWrite(SLAVESELECT,LOW);
   SPI.transfer(RESET); //Reset cmd
@@ -128,15 +128,14 @@ boolean MCP2515::initCAN(int baudConst)
   mode = readReg(CANSTAT) >> 5;
   if(mode != 0b100) 
     return false;
-	
-  return(setCANBaud(baudConst));
 
+  return(setCANBaud(baudConst));
 }
 
 boolean MCP2515::setCANBaud(int baudConst)
 {
   byte brp;
-  
+
   //BRP<5:0> = 00h, so divisor (0+1)*2 for 125ns per quantum at 16MHz for 500K   
   //SJW<1:0> = 00h, Sync jump width = 1
   switch(baudConst)
@@ -147,12 +146,13 @@ boolean MCP2515::setCANBaud(int baudConst)
     case CAN_BAUD_100K: brp = 4; break;
     default: return false;
   }
+
   digitalWrite(SLAVESELECT,LOW);
   SPI.transfer(WRITE); 
   SPI.transfer(CNF1);
   SPI.transfer(brp & 0b00111111);
   digitalWrite(SLAVESELECT,HIGH);  
-  
+
   //PRSEG<2:0> = 0x01, 2 time quantum for prop
   //PHSEG<2:0> = 0x06, 7 time constants to PS1 sample
   //SAM = 0, just 1 sampling
@@ -162,16 +162,16 @@ boolean MCP2515::setCANBaud(int baudConst)
   SPI.transfer(CNF2);
   SPI.transfer(0b10110001);
   digitalWrite(SLAVESELECT,HIGH); 
-  
+
   //PHSEG2<2:0> = 5 for 6 time constants after sample
   digitalWrite(SLAVESELECT,LOW);
   SPI.transfer(WRITE); 
   SPI.transfer(CNF3);
   SPI.transfer(0x05);
   digitalWrite(SLAVESELECT,HIGH); 
-  
+
   //SyncSeg + PropSeg + PS1 + PS2 = 1 + 2 + 7 + 6 = 16
-  
+
   return true;
 }
 
@@ -182,20 +182,19 @@ boolean MCP2515::setCANNormalMode(boolean singleShot)
   //OSM = 0, not one shot
   //CLKEN = 1, disable output clock
   //CLKPRE = 0b11, clk/8
-  
+
   byte settings;
   byte mode;
-  
+
   settings = 0b00000111 | (singleShot << 3);
-  
+
   writeReg(CANCTRL,settings);
   //Read mode and make sure it is normal
   mode = readReg(CANSTAT) >> 5;
   if(mode != 0)
     return false;
-    
+
   return true;
-  
 }
 
 boolean MCP2515::setCANReceiveonlyMode()
@@ -205,79 +204,78 @@ boolean MCP2515::setCANReceiveonlyMode()
   //OSM = 0, not one shot
   //CLKEN = 1, disable output clock
   //CLKPRE = 0b11, clk/8
-  
+
   byte mode;
-  
+
   writeReg(CANCTRL,0b01100111);
   //Read mode and make sure it is receive-only
   mode = readReg(CANSTAT) >> 5;
   if(mode != 3)
     return false;
-    
+
   return true;
-  
 }
 
 boolean MCP2515::receiveCANMessage(CANMSG *msg, unsigned long timeout)
 {
-    unsigned long startTime, endTime;
-    unsigned short standardID = 0;
-	boolean gotMessage;
-    byte val;
-    int i;
+  unsigned long startTime, endTime;
+  unsigned short standardID = 0;
+  boolean gotMessage;
+  byte val;
+  int i;
 
-    startTime = millis();
-    endTime = startTime + timeout;
-    gotMessage = false;
-    while(millis() < endTime)
+  startTime = millis();
+  endTime = startTime + timeout;
+  gotMessage = false;
+  while(millis() < endTime)
+  {
+    val = readReg(CANINTF);
+    //If we have a message available, read it
+    if(bitRead(val,RX0IF) == 1)
     {
-      val = readReg(CANINTF);
-      //If we have a message available, read it
-      if(bitRead(val,RX0IF) == 1)
-      {
-        gotMessage = true;
-        break;
-      }
+      gotMessage = true;
+      break;
     }
-    
-    if(gotMessage)
+  }
+
+  if(gotMessage)
+  {
+    val = readReg(RXB0CTRL);
+    msg->rtr = ((bitRead(val,3) == 1) ? true : false);
+    //Address received from
+    val = readReg(RXB0SIDH);
+    standardID |= (val << 3);
+    val = readReg(RXB0SIDL);
+    standardID |= (val >> 5);
+
+    msg->adrsValue = long(standardID);
+    msg->isExtendedAdrs = ((bitRead(val,EXIDE) == 1) ? true : false);
+    if(msg->isExtendedAdrs)
     {
-      val = readReg(RXB0CTRL);
-      msg->rtr = ((bitRead(val,3) == 1) ? true : false);
-
-      //Address received from
-
-      val = readReg(RXB0SIDH);
-      standardID |= (val << 3);
-      val = readReg(RXB0SIDL); 
-      standardID |= (val >> 5);
-	  
-	  msg->adrsValue = long(standardID);
-      msg->isExtendedAdrs = ((bitRead(val,EXIDE) == 1) ? true : false);
-      if(msg->isExtendedAdrs)
-      {
-        msg->adrsValue = ((msg->adrsValue << 2) | (val & 0b11));
-        val = readReg(RXB0EID8);
-		msg->adrsValue = (msg->adrsValue << 8) | val;
-        val = readReg(RXB0EID0);
-        msg->adrsValue = (msg->adrsValue << 8) | val;
-      }
-      msg->adrsValue = 0b11111111111111111111111111111 & msg->adrsValue; // mask out extra bits
-      //Read data bytes
-      val = readReg(RXB0DLC);
-      msg->dataLength = (val & 0xf); 
-      digitalWrite(SLAVESELECT,LOW);
-      SPI.transfer(READ); 
-      SPI.transfer(RXB0D0);
-      for(i = 0; i < msg->dataLength; i++)
-        msg->data[i] = SPI.transfer(0);
-      digitalWrite(SLAVESELECT,HIGH);
-      
-      //And clear read interrupt
-      writeRegBit(CANINTF,RX0IF,0);
+      msg->adrsValue = ((msg->adrsValue << 2) | (val & 0b11));
+      val = readReg(RXB0EID8);
+      msg->adrsValue = (msg->adrsValue << 8) | val;
+      val = readReg(RXB0EID0);
+      msg->adrsValue = (msg->adrsValue << 8) | val;
     }
-    
-    return gotMessage;
+    msg->adrsValue = 0b11111111111111111111111111111 & msg->adrsValue; // mask out extra bits
+    //Read data bytes
+    val = readReg(RXB0DLC);
+    msg->dataLength = (val & 0xf);
+    digitalWrite(SLAVESELECT,LOW);
+    SPI.transfer(READ);
+    SPI.transfer(RXB0D0);
+    for(i = 0; i < msg->dataLength; i++)
+    {
+      msg->data[i] = SPI.transfer(0);
+    }
+    digitalWrite(SLAVESELECT,HIGH);
+
+    //And clear read interrupt
+    writeRegBit(CANINTF,RX0IF,0);
+  }
+
+  return gotMessage;
 }
 
 boolean MCP2515::transmitCANMessage(CANMSG msg, unsigned long timeout)
@@ -287,46 +285,48 @@ boolean MCP2515::transmitCANMessage(CANMSG msg, unsigned long timeout)
   unsigned short val;
   int i;
   unsigned short standardID = 0;
-  
+
   standardID = short(msg.adrsValue);
   startTime = millis();
   endTime = startTime + timeout;
   sentMessage = false;
   if(!msg.isExtendedAdrs)
   {
-	//Write standard ID registers
-	val = standardID >> 3;
-	writeReg(TXB0SIDH,val);
-	val = standardID << 5;
-	writeReg(TXB0SIDL,val);
+    //Write standard ID registers
+    val = standardID >> 3;
+    writeReg(TXB0SIDH,val);
+    val = standardID << 5;
+    writeReg(TXB0SIDL,val);
   }
   else
   {
-	//Write extended ID registers, which use the standard ID registers
-	val = msg.adrsValue >> 21;
-	writeReg(TXB0SIDH,val);
-	val = msg.adrsValue >> 16;
-	val = val & 0b00000011;
-	val = val | (msg.adrsValue >> 13 & 0b11100000);
-	val |= 1 << EXIDE;
-	writeReg(TXB0SIDL,val);
-	val = msg.adrsValue >> 8;
-	writeReg(TXB0EID8,val);
+    //Write extended ID registers, which use the standard ID registers
+    val = msg.adrsValue >> 21;
+    writeReg(TXB0SIDH,val);
+    val = msg.adrsValue >> 16;
+    val = val & 0b00000011;
+    val = val | (msg.adrsValue >> 13 & 0b11100000);
+    val |= 1 << EXIDE;
+    writeReg(TXB0SIDL,val);
+    val = msg.adrsValue >> 8;
+    writeReg(TXB0EID8,val);
     val = msg.adrsValue;
     writeReg(TXB0EID0,val);
   }
-  
+
   val = msg.dataLength & 0x0f;
   if(msg.rtr)
     bitWrite(val,TXRTR,1);
   writeReg(TXB0DLC,val);
-  
+
   //Message bytes
   digitalWrite(SLAVESELECT,LOW);
   SPI.transfer(WRITE); 
   SPI.transfer(TXB0D0);
   for(i = 0; i < msg.dataLength; i++)
+  {
     SPI.transfer(msg.data[i]);
+  }
   digitalWrite(SLAVESELECT,HIGH);
 
   //Transmit the message
@@ -345,12 +345,11 @@ boolean MCP2515::transmitCANMessage(CANMSG msg, unsigned long timeout)
 
   //Abort the send if failed
   writeRegBit(TXB0CTRL,TXREQ,0);
-  
+
   //And clear write interrupt
   writeRegBit(CANINTF,TX0IF,0);
 
   return sentMessage;
-
 }
 
 byte MCP2515::getCANTxErrCnt()
@@ -388,13 +387,13 @@ void MCP2515::writeRegBit(byte regno, byte bitno, byte val)
 byte MCP2515::readReg(byte regno)
 {
   byte val;
-  
+
   digitalWrite(SLAVESELECT,LOW);
   SPI.transfer(READ); 
   SPI.transfer(regno);
   val = SPI.transfer(0);
   digitalWrite(SLAVESELECT,HIGH);
-  
+
   return val;  
 }  
 
@@ -417,7 +416,7 @@ long MCP2515::queryOBD(byte code)
   msg.data[5] = 0;
   msg.data[6] = 0;
   msg.data[7] = 0;
-  
+
   if(!transmitCANMessage(msg,1000))
     return 0;
 
@@ -425,24 +424,26 @@ long MCP2515::queryOBD(byte code)
   if (rxSuccess) 
   {
     //Check if the PIDs match (in case other messages are also on bus)
-	noMatch = 0;
+    noMatch = 0;
     while(msg.data[2] != code)
-	{
-        rxSuccess = receiveCANMessage(&msg,1000);
-        noMatch++;
-        if (!rxSuccess || noMatch >= 5) 
-		{
-            return 0;
-        }
+    {
+      rxSuccess = receiveCANMessage(&msg,1000);
+      noMatch++;
+      if (!rxSuccess || noMatch >= 5)
+      {
+        return 0;
+      }
     }
-  } 
-  else 
+  }
+  else
+  {
     return 0;
-    
+  }
+
   if(msg.data[0] == 3)
     val = msg.data[3];
   else
     val = 256 * msg.data[3] + msg.data[4];
-    
+
   return val;
 }
