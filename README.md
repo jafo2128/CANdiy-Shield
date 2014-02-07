@@ -13,6 +13,10 @@ Shop: [CANdiy-Shield](http://www.watterott.com/en/Arduino-CANdiy-Shield)
 * Prototyping Area
 
 
+## Hardware
+* [Schematics + Layout](https://github.com/watterott/CANdiy-Shield/tree/master/pcb)
+
+
 ## Software
 * [Arduino Examples](https://github.com/watterott/Arduino-Libs)
 
