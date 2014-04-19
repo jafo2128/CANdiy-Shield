@@ -11,6 +11,7 @@ Shop: [CANdiy-Shield](http://www.watterott.com/en/Arduino-CANdiy-Shield)
 * Microchip MCP2551 CAN Transceiver
 * 2 CAN connectors (RJ45)
 * Prototyping Area
+* Compatible with all Arduino Boards (SPI connection via 6-Pin ISP connector)
 
 
 ## Hardware
