@@ -8,7 +8,8 @@ Shop: [CANdiy-Shield](http://www.watterott.com/en/Arduino-CANdiy-Shield)
 
 ## Features
 * Microchip MCP2515 CAN Controller (SPI)
-* Microchip MCP2551 CAN Transceiver
+* Microchip MCP2562 CAN Transceiver (CANdiy-Shield v1.x: MCP2551)
+* Switchable between 3V3 or 5V logic level
 * 2 CAN connectors (RJ45)
 * Prototyping Area
 * Compatible with all Arduino Boards (SPI connection via 6-Pin ISP connector)
