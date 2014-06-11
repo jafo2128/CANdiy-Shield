@@ -5,3 +5,4 @@
 * Mechanic (OBD-II Interface): http://code.google.com/p/mechanic/
 * Electricity on Tap: http://www.terabatt.com/makerscorner.html
 * WikiCAN (OBD On-Board-Diagnostics): http://www.wikican.uni-bayreuth.de/wikican/index.php?title=WikiCAN-Arduino
+* MERG CBUS (Model Railways): http://www.oscale.net/cbus http://www.merg.org.uk/merg_resources/cbus.php
