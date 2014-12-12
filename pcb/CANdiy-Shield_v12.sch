@@ -6,7 +6,7 @@
 <setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="0.01" altunitdist="inch" altunit="inch"/>
+<grid distance="0.05" unitdist="inch" unit="inch" style="lines" multiple="1" display="yes" altdistance="0.025" altunitdist="inch" altunit="inch"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="no" active="no"/>
 <layer number="2" name="Route2" color="1" fill="3" visible="no" active="no"/>
@@ -157,51 +157,6 @@
 <connect gate="A" pin="1" pad="1"/>
 <connect gate="A" pin="2" pad="2"/>
 </connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-</devices>
-</deviceset>
-</devicesets>
-</library>
-<library name="frames">
-<packages>
-</packages>
-<symbols>
-<symbol name="A4L-LOC">
-<wire x1="256.54" y1="3.81" x2="256.54" y2="8.89" width="0.1016" layer="94"/>
-<wire x1="256.54" y1="8.89" x2="256.54" y2="13.97" width="0.1016" layer="94"/>
-<wire x1="256.54" y1="13.97" x2="256.54" y2="19.05" width="0.1016" layer="94"/>
-<wire x1="256.54" y1="19.05" x2="256.54" y2="24.13" width="0.1016" layer="94"/>
-<wire x1="161.29" y1="3.81" x2="161.29" y2="24.13" width="0.1016" layer="94"/>
-<wire x1="161.29" y1="24.13" x2="215.265" y2="24.13" width="0.1016" layer="94"/>
-<wire x1="215.265" y1="24.13" x2="256.54" y2="24.13" width="0.1016" layer="94"/>
-<wire x1="246.38" y1="3.81" x2="246.38" y2="8.89" width="0.1016" layer="94"/>
-<wire x1="246.38" y1="8.89" x2="256.54" y2="8.89" width="0.1016" layer="94"/>
-<wire x1="246.38" y1="8.89" x2="215.265" y2="8.89" width="0.1016" layer="94"/>
-<wire x1="215.265" y1="8.89" x2="215.265" y2="3.81" width="0.1016" layer="94"/>
-<wire x1="215.265" y1="8.89" x2="215.265" y2="13.97" width="0.1016" layer="94"/>
-<wire x1="215.265" y1="13.97" x2="256.54" y2="13.97" width="0.1016" layer="94"/>
-<wire x1="215.265" y1="13.97" x2="215.265" y2="19.05" width="0.1016" layer="94"/>
-<wire x1="215.265" y1="19.05" x2="256.54" y2="19.05" width="0.1016" layer="94"/>
-<wire x1="215.265" y1="19.05" x2="215.265" y2="24.13" width="0.1016" layer="94"/>
-<text x="217.17" y="15.24" size="2.54" layer="94" font="vector">&gt;DRAWING_NAME</text>
-<text x="217.17" y="10.16" size="2.286" layer="94" font="vector">&gt;LAST_DATE_TIME</text>
-<text x="230.505" y="5.08" size="2.54" layer="94" font="vector">&gt;SHEET</text>
-<text x="216.916" y="4.953" size="2.54" layer="94" font="vector">Sheet:</text>
-<frame x1="0" y1="0" x2="260.35" y2="179.07" columns="6" rows="4" layer="94"/>
-</symbol>
-</symbols>
-<devicesets>
-<deviceset name="A4L-LOC" prefix="FRAME" uservalue="yes">
-<description>&lt;b&gt;FRAME&lt;/b&gt;&lt;p&gt;
-DIN A4, landscape with location and doc. field</description>
-<gates>
-<gate name="G$1" symbol="A4L-LOC" x="0" y="0"/>
-</gates>
-<devices>
-<device name="">
 <technologies>
 <technology name=""/>
 </technologies>
@@ -13642,6 +13597,52 @@ Source: Comchip CGRM4001-G.pdf</description>
 </deviceset>
 </devicesets>
 </library>
+<library name="we-symbol">
+<description>Symbols, Logos...</description>
+<packages>
+</packages>
+<symbols>
+<symbol name="A4L-LOC">
+<wire x1="256.54" y1="3.81" x2="256.54" y2="8.89" width="0.1016" layer="94"/>
+<wire x1="256.54" y1="8.89" x2="256.54" y2="13.97" width="0.1016" layer="94"/>
+<wire x1="256.54" y1="13.97" x2="256.54" y2="19.05" width="0.1016" layer="94"/>
+<wire x1="256.54" y1="19.05" x2="256.54" y2="24.13" width="0.1016" layer="94"/>
+<wire x1="161.29" y1="3.81" x2="161.29" y2="24.13" width="0.1016" layer="94"/>
+<wire x1="161.29" y1="24.13" x2="215.265" y2="24.13" width="0.1016" layer="94"/>
+<wire x1="215.265" y1="24.13" x2="256.54" y2="24.13" width="0.1016" layer="94"/>
+<wire x1="246.38" y1="3.81" x2="246.38" y2="8.89" width="0.1016" layer="94"/>
+<wire x1="246.38" y1="8.89" x2="256.54" y2="8.89" width="0.1016" layer="94"/>
+<wire x1="246.38" y1="8.89" x2="215.265" y2="8.89" width="0.1016" layer="94"/>
+<wire x1="215.265" y1="8.89" x2="215.265" y2="3.81" width="0.1016" layer="94"/>
+<wire x1="215.265" y1="8.89" x2="215.265" y2="13.97" width="0.1016" layer="94"/>
+<wire x1="215.265" y1="13.97" x2="256.54" y2="13.97" width="0.1016" layer="94"/>
+<wire x1="215.265" y1="13.97" x2="215.265" y2="19.05" width="0.1016" layer="94"/>
+<wire x1="215.265" y1="19.05" x2="256.54" y2="19.05" width="0.1016" layer="94"/>
+<wire x1="215.265" y1="19.05" x2="215.265" y2="24.13" width="0.1016" layer="94"/>
+<frame x1="0" y1="0" x2="260.35" y2="179.07" columns="6" rows="4" layer="94"/>
+<text x="217.17" y="15.24" size="2.032" layer="94" font="vector">&gt;DRAWING_NAME</text>
+<text x="217.17" y="10.16" size="2.032" layer="94" font="vector">&gt;LAST_DATE_TIME</text>
+<text x="230.505" y="5.08" size="2.54" layer="94" font="vector">&gt;SHEET</text>
+<text x="217.17" y="5.08" size="2.54" layer="94" font="vector">Sheet:</text>
+<text x="217.17" y="20.32" size="2.032" layer="94" font="vector">www.watterott.com</text>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="FRAME-A4L" prefix="FRAME" uservalue="yes">
+<description>Frame: DIN A4 Landscape</description>
+<gates>
+<gate name="G$1" symbol="A4L-LOC" x="0" y="0"/>
+</gates>
+<devices>
+<device name="">
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -13652,7 +13653,6 @@ Source: Comchip CGRM4001-G.pdf</description>
 </class>
 </classes>
 <parts>
-<part name="FRAME1" library="frames" deviceset="A4L-LOC" device=""/>
 <part name="GND4" library="supply1" deviceset="GND" device=""/>
 <part name="LOGO2" library="OSHW" deviceset="OSHW_LOGO_6MIL" device="X0100-NT"/>
 <part name="RESET" library="Switch-SMD" deviceset="SW_SMD" device="S"/>
@@ -13723,28 +13723,24 @@ Source: Comchip CGRM4001-G.pdf</description>
 <part name="ARD" library="Arduino" deviceset="UNO_ISP" device=""/>
 <part name="5V" library="wirepad" deviceset="1,6/0,8" device=""/>
 <part name="GND9" library="supply1" deviceset="GND" device=""/>
+<part name="FRAME1" library="we-symbol" deviceset="FRAME-A4L" device=""/>
 </parts>
 <sheets>
 <sheet>
 <plain>
-<text x="161.29" y="34.29" size="1.27" layer="95">Released under the Creative Commons Attribution Share-Alike License</text>
-<text x="161.29" y="31.75" size="1.27" layer="95">http://creativecommons.org/licenses/by-sa/4.0/</text>
-<text x="161.29" y="27.94" size="1.27" layer="95">Designed by Stephan Watterott (Watterott electronic)</text>
+<text x="162.56" y="21.59" size="1.27" layer="95">Released under the Creative Commons Attribution Share-Alike License</text>
+<text x="162.56" y="19.05" size="1.27" layer="95">http://creativecommons.org/licenses/by-sa/4.0/</text>
+<text x="162.56" y="15.24" size="1.27" layer="95">Designed by Stephan Watterott (Watterott electronic)</text>
 <text x="49.53" y="127" size="2.54" layer="95">Arduino</text>
 <text x="170.18" y="120.65" size="1.6764" layer="95">F1</text>
-<text x="161.29" y="25.4" size="1.27" layer="95">Based on the work of Jörg Pleumann</text>
+<text x="162.56" y="12.7" size="1.27" layer="95">Based on the work of Jörg Pleumann</text>
 <text x="162.56" y="110.49" size="1.778" layer="250">Short Jumpers JP2 and JP3 for power supply from RJ45 (required for Railuino).</text>
 </plain>
 <instances>
-<instance part="FRAME1" gate="G$1" x="0" y="0" smashed="yes">
-<attribute name="DRAWING_NAME" x="217.17" y="15.24" size="2.54" layer="94" font="vector"/>
-<attribute name="LAST_DATE_TIME" x="217.17" y="10.16" size="2.286" layer="94" font="vector"/>
-<attribute name="SHEET" x="230.505" y="5.08" size="2.54" layer="94" font="vector"/>
-</instance>
 <instance part="GND4" gate="1" x="110.49" y="121.92" smashed="yes">
 <attribute name="VALUE" x="107.95" y="119.38" size="1.778" layer="96"/>
 </instance>
-<instance part="LOGO2" gate="G$1" x="201.93" y="19.05"/>
+<instance part="LOGO2" gate="G$1" x="198.12" y="7.62"/>
 <instance part="RESET" gate="G$1" x="105.41" y="127" rot="R270"/>
 <instance part="GND15" gate="1" x="107.95" y="54.61" smashed="yes" rot="MR0">
 <attribute name="VALUE" x="110.49" y="52.07" size="1.778" layer="96" rot="MR0"/>
@@ -13935,7 +13931,7 @@ Source: Comchip CGRM4001-G.pdf</description>
 <attribute name="NAME" x="29.21" y="24.13" size="1.778" layer="95" rot="R90"/>
 <attribute name="VALUE" x="33.655" y="24.13" size="1.778" layer="96" rot="R90"/>
 </instance>
-<instance part="U$1" gate="G$1" x="201.93" y="11.43"/>
+<instance part="U$1" gate="G$1" x="208.28" y="7.62"/>
 <instance part="C7" gate="G$1" x="148.59" y="121.92"/>
 <instance part="D1" gate="G$1" x="160.02" y="124.46" smashed="yes" rot="R180">
 <attribute name="NAME" x="160.02" y="121.4374" size="1.778" layer="95" rot="R180"/>
@@ -13945,8 +13941,8 @@ Source: Comchip CGRM4001-G.pdf</description>
 <instance part="GND8" gate="1" x="148.59" y="114.3" smashed="yes" rot="MR0">
 <attribute name="VALUE" x="151.13" y="111.76" size="1.778" layer="96" rot="MR0"/>
 </instance>
-<instance part="X_2" gate="G$1" x="166.37" y="11.43"/>
-<instance part="X_1" gate="G$1" x="173.99" y="11.43"/>
+<instance part="X_2" gate="G$1" x="165.1" y="7.62"/>
+<instance part="X_1" gate="G$1" x="170.18" y="7.62"/>
 <instance part="ARD" gate="G$1" x="55.88" y="95.25"/>
 <instance part="5V" gate="P" x="26.67" y="113.03" smashed="yes">
 <attribute name="VALUE" x="25.527" y="109.728" size="1.778" layer="96"/>
@@ -13954,6 +13950,7 @@ Source: Comchip CGRM4001-G.pdf</description>
 <instance part="GND9" gate="1" x="166.37" y="80.01" smashed="yes" rot="MR0">
 <attribute name="VALUE" x="168.91" y="77.47" size="1.778" layer="96" rot="MR0"/>
 </instance>
+<instance part="FRAME1" gate="G$1" x="0" y="0"/>
 </instances>
 <busses>
 </busses>
