@@ -3,7 +3,7 @@ The CANdiy-Shield is an Arduino plug-on module with CAN-Bus (Controller Area Net
 
 Shop: [CANdiy-Shield](http://www.watterott.com/en/Arduino-CANdiy-Shield)
 
-[![CANdiy-Shield](https://raw.github.com/watterott/CANdiy-Shield/master/img/candiy-shield.jpg)](http://www.watterott.com/en/Arduino-CANdiy-Shield)
+[![CANdiy-Shield](https://raw.github.com/watterott/CANdiy-Shield/master/pcb/CANdiy-Shield_v13.jpg)](http://www.watterott.com/en/Arduino-CANdiy-Shield)
 
 
 ## Features
