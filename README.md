@@ -1,9 +1,13 @@
 # CANdiy-Shield
 The CANdiy-Shield is an Arduino plug-on module with CAN-Bus (Controller Area Network) connectivity.
 
-Shop: [CANdiy-Shield](http://www.watterott.com/en/Arduino-CANdiy-Shield)
-
 [![CANdiy-Shield](https://raw.github.com/watterott/CANdiy-Shield/master/pcb/CANdiy-Shield_v13.jpg)](http://www.watterott.com/en/Arduino-CANdiy-Shield)
+
+
+## Shop
+* [CANdiy-Shield](http://www.watterott.com/en/Arduino-CANdiy-Shield)
+* [Railuino Components](http://www.watterott.com/en/Railuino-components)
+* [OBD2-Connector](http://www.watterott.com/en/OBD2-Connector-With-PCB)
 
 
 ## Features
@@ -15,12 +19,9 @@ Shop: [CANdiy-Shield](http://www.watterott.com/en/Arduino-CANdiy-Shield)
 * Compatible with all Arduino Boards (SPI connection via 6-Pin ISP connector)
 
 
-## Hardware
+## Hardware and Software
 * [Schematics + Layout](https://github.com/watterott/CANdiy-Shield/tree/master/pcb)
-
-
-## Software
-* [Arduino Examples](https://github.com/watterott/Arduino-Libs)
+* [Arduino Library and Examples](https://github.com/watterott/Arduino-Libs)
 
 
 ## Projects
