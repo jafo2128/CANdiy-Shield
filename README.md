@@ -26,8 +26,11 @@ The CANdiy-Shield is a plug-on module for Arduino/Genuino with CAN-Bus (Controll
 
 ## Projects
 * Railuino (Maerklin Model Railways): http://code.google.com/p/railuino/
-  French: http://mchobby.be/wiki/index.php?title=Railuino
-  English: http://www.yaasan.mints.ne.jp/railuino.html
+  [German Documentation](https://railuino.googlecode.com/files/2013-08-01-Railuino-Directors-Cut.pdf),
+  [German Forum](http://www.stummiforum.de/viewtopic.php?t=90072),
+  [German Magazine Article](https://shop.heise.de/katalog/ct-hardware-hacks-1-2013),
+  [English Documentation](http://www.yaasan.mints.ne.jp/railuino.html),
+  [French Documentation](http://mchobby.be/wiki/index.php?title=Railuino)
 * Mechanic (OBD-II Interface): http://code.google.com/p/mechanic/
 * Electricity on Tap: http://www.terabatt.com/makerscorner.html
 * WikiCAN (OBD On-Board-Diagnostics): http://www.wikican.uni-bayreuth.de/wikican/index.php?title=WikiCAN-Arduino
